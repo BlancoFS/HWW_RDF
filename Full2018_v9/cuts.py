@@ -14,13 +14,63 @@ _tmp = [
 
 preselections = ' && '.join(_tmp)
 
+cuts['hww2l2v_13TeV_sr'] = {
+    'expr': 'sr',
+    'categories' : {
+        '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0',
+        '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0',
+        '2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5',
+        '2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5',   
+    }
+}
 
+cuts['hww2l2v_13TeV_sr_bkg'] = {
+    'expr': 'sr',
+    'categories' : {
+        '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0 && (RF_score_0J_Bkg>RF_score_0J_LL && RF_score_0J_Bkg>RF_score_0J_TT)',
+        '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0 && (RF_score_1J_Bkg>RF_score_1J_LL && RF_score_1J_Bkg>RF_score_1J_TT)',
+        '2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5 && (RF_score_2J_Bkg>RF_score_2J_LL && RF_score_2J_Bkg>RF_score_2J_TT)',
+        '2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5 && (RF_score_VBF_Bkg>RF_score_VBF_LL && RF_score_VBF_Bkg>RF_score_VBF_TT)',
+    }
+}
+
+cuts['hww2l2v_13TeV_sr_LL'] = {
+    'expr': 'sr',
+    'categories' : {
+        '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0 && (RF_score_0J_Bkg<RF_score_0J_LL && RF_score_0J_LL>RF_score_0J_TT)',
+        '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0 && (RF_score_1J_Bkg<RF_score_1J_LL && RF_score_1J_LL>RF_score_1J_TT)',
+        '2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5 && (RF_score_2J_Bkg<RF_score_2J_LL && RF_score_2J_LL>RF_score_2J_TT)',
+        '2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5 && (RF_score_VBF_Bkg<RF_score_VBF_LL && RF_score_VBF_LL>RF_score_VBF_TT)',
+    }
+}
+
+cuts['hww2l2v_13TeV_sr_TT'] = {
+    'expr': 'sr',
+    'categories' : {
+        '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0 && (RF_score_0J_TT>RF_score_0J_LL && RF_score_0J_Bkg<RF_score_0J_TT)',
+        '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0 && (RF_score_1J_TT>RF_score_1J_LL && RF_score_1J_Bkg<RF_score_1J_TT)',
+        '2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5 && (RF_score_2J_TT>RF_score_2J_LL && RF_score_2J_Bkg<RF_score_2J_TT)',
+        '2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5 && (RF_score_VBF_TT>RF_score_VBF_LL && RF_score_VBF_Bkg<RF_score_VBF_TT)',
+    }
+}
+
+cuts['hww2l2v_13TeV_sr_Signal'] = {
+    'expr': 'sr',
+    'categories' : {
+        '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0 && (RF_score_0J_LL>RF_score_0J_Bkg || RF_score_0J_TT>RF_score_0J_Bkg)',
+        '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0 && (RF_score_1J_LL>RF_score_1J_Bkg || RF_score_1J_TT>RF_score_1J_Bkg)',
+        '2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5 && (RF_score_2J_LL>RF_score_2J_Bkg || RF_score_2J_TT>RF_score_2J_Bkg)',
+        '2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5 && (RF_score_VBF_LL>RF_score_VBF_Bkg || RF_score_VBF_TT>RF_score_VBF_Bkg)',
+    }
+}
+
+'''
 cuts['hww2l2v_13TeV_loose_sr'] = {
     'expr': 'sr',
     'categories' : {
         #'0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0 && BDTG4D3_0J>0.5',
         '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0 && BDTG4D3_1J>0.5',
-        '2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5 && BDTG4D3_VBF>0.50',
+        #'2j' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD<0.5 && BDTG4D3_2J>0.65',
         #'2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5 && BDTG4D3_VBF>0.75',
     }
 }
@@ -44,7 +94,7 @@ cuts['hww2l2v_13TeV_tight_sr'] = {
         '2j_vbf' : 'Sum(CleanJet_pt>30.0)==2 && D_VBF_QCD>0.5 && BDTG4D3_VBF>0.90',
     }
 }
-
+'''
 
 cuts['hww2l2v_13TeV_top']  = { 
    'expr' : 'topcr',
@@ -65,19 +115,14 @@ cuts['hww2l2v_13TeV_dytt']  = {
 }
 
 
-cuts['hww2l2v_13TeV_WW'] = {
-    'expr' : 'sr',
-    'categories' : {
-        '0j' : 'zeroJet && BDTG4D3_0J<0.5',
-        '1j' : 'oneJet && BDTG4D3_1J<0.5',
-        '2j' : 'Sum(CleanJet_pt>30.0)==2 && BDTG4D3_VBF<0.75 && BDTG4D3_2J<0.65',
-    }
-}
-
-
-
-
-
+#cuts['hww2l2v_13TeV_WW'] = {
+#    'expr' : 'sr',
+#    'categories' : {
+#        '0j' : 'zeroJet && BDTG4D3_0J<0.5',
+#        '1j' : 'oneJet && BDTG4D3_1J<0.5',
+#        '2j' : 'Sum(CleanJet_pt>30.0)==2 && BDTG4D3_VBF<0.75 && BDTG4D3_2J<0.65',
+#    }
+#}
 
 
 

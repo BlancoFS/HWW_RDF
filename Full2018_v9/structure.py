@@ -87,7 +87,7 @@ structure['ZZ']  = {
                   }
 
 structure['ggH_hww'] = {
-                  'isSignal' : 0,
+                  'isSignal' : 1,
                   'isData'   : 0,
                   'scaleSampleForDatacard' : {cut : 1.03364 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38
                   }
@@ -100,7 +100,7 @@ structure['qqH_hww'] = {
 
 
 ###### POLARIZED SIGNALS
-'''
+
 structure['ggH_HWLWL'] = {
                   'isSignal' : 1,
                   'isData'   : 0,
@@ -112,7 +112,7 @@ structure['ggH_HWTWT'] = {
                   'isData'   : 0,
                   'scaleSampleForDatacard' : {cut : 1.03364 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38
                   }
-'''
+
 '''
 structure['ggH_HWW_Int'] = {
                   'isSignal' : 1,

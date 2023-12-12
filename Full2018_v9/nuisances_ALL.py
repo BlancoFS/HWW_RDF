@@ -282,7 +282,7 @@ nuisances['JER'] = {
     'AsLnN': '1'
 }
 
-'''
+
 ##### MET energy scale
 nuisances['met'] = {
     'name': 'CMS_scale_met_2018',
@@ -296,7 +296,7 @@ nuisances['met'] = {
     'folderDown': makeMCDirectory('METdo_suffix'),
     'AsLnN': '1'
 }
-
+'''
 
 ##### Pileup
 nuisances['PU'] = {

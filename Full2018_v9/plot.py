@@ -71,22 +71,23 @@ groupPlot['VgS']  = {
                   'samples'  : ['WgS', 'ZgS']
               }
 
+
+'''
 groupPlot['ggF']  = {
                   'nameHR' : "ggF",
-                  'isSignal' : 0,
+                  'isSignal' : 1,
                   'color'    : 623,
                   'samples'  : ['ggH_hww']
               }
 
-'''
 groupPlot['VBF']  = {
                   'nameHR' : "VBF",
-                  'isSignal' : 0,
+                  'isSignal' : 1,
                   'color'    : 600,
                   'samples'  : ['qqH_hww']
               }
 
-
+'''
 groupPlot['ggH_HWLWL']  = {
                   'nameHR' : "ggF: LL",
                   'isSignal' : 1,
@@ -101,7 +102,7 @@ groupPlot['ggH_HWTWT']  = {
                   'samples'  : ['ggH_HWTWT']
               }
 
-'''
+
 '''
 groupPlot['ggH_HWW_Int']  = {
                   'nameHR' : "ggF: Int.",
@@ -109,13 +110,12 @@ groupPlot['ggH_HWW_Int']  = {
                   'color'    : 921,
                   'samples'  : ['ggH_HWW_Int']
               }
-
 '''
 
 groupPlot['qqH_HWLWL']  = {
                   'nameHR' : "VBF: LL",
                   'isSignal' : 1,
-                  'color'    : 600+1,
+                  'color'    : 418+1,
                   'samples'  : ['qqH_HWLWL']
               }
 
@@ -402,7 +402,6 @@ plot['WH_hww'] = {
                   'scale'    : 1    #
                   }
 
-
 '''
 plot['qqH_hww'] = {
                   'nameHR' : 'qqH',
@@ -412,7 +411,6 @@ plot['qqH_hww'] = {
                   'scale'    : 1    #
                   }
 
-'''
 plot['ggH_hww'] = {
                   'nameHR' : 'ggH',
                   'color': 632, # kRed 
@@ -422,7 +420,6 @@ plot['ggH_hww'] = {
                   }
 
 '''
-
 ###
 ### POLARIZATION
 ###
@@ -445,7 +442,7 @@ plot['ggH_HWTWT'] = {
                   }
 
 
-
+'''
 plot['ggH_HWW_Int'] = {
                   'nameHR' : 'ggH Int',
                   'color': 632,
@@ -453,12 +450,10 @@ plot['ggH_HWW_Int'] = {
                   'isData'   : 0,
                   'scale'    : 1
 }
-
-
 '''
 plot['qqH_HWLWL'] = {
                   'nameHR' : 'qqH',
-                  'color': 600+1, # kRed+1 
+                  'color': 418+1, # kRed+1 
                   'isSignal' : 0,
                   'isData'   : 0,    
                   'scale'    : 1    #
@@ -468,11 +463,10 @@ plot['qqH_HWLWL'] = {
 plot['qqH_HWTWT'] = {
                   'nameHR' : 'qqH',
                   'color': 632+1, 
-                  'isSignal' : 1,
+                  'isSignal' : 0,
                   'isData'   : 0,    
                   'scale'    : 1   
                   }
-
 '''
 plot['qqH_HWW_TTInt'] = {
                   'nameHR' : 'VBF HWW TT+Int',
@@ -518,9 +512,8 @@ plot['DATA']  = {
                   'color': 1 ,  
                   'isSignal' : 0,
                   'isData'   : 1 ,
-                  'isBlind'  : 1
+                  'isBlind'  : 0
               }
-
 
 # additional options
 

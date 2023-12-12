@@ -336,37 +336,6 @@ aliases['Higgs_WW_TTInt'] = {
     'samples': ['ggH_HWLWL', 'ggH_HWTWT', 'ggH_HWW_Int', 'ggH_HWW_TTInt', 'qqH_HWLWL', 'qqH_HWTWT'],
 }
 
-###
-### BDT GGF 0J
-### 
-
-aliases['BDTG4D3_0J'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_0J.cc+'],
-    'class' : 'TMVA_HWW_0J',
-    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,mpmet,detall',
-}
-
-### 
-### BDT GGF 1J
-###
-
-aliases['BDTG4D3_1J'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_1J.cc+'],
-    'class' : 'TMVA_HWW_1J',
-    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,dphilep1jet1,dphilep2jet1,mpmet,detall',
-}
-
-###
-### VBF GGF Matrix Element
-###
-
-#aliases['D_VBF_QCD'] = {
-#    'linesToAdd' : ['gSystem->Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libJHUGenMELAMELA.so","", kTRUE);',
-#                    'gSystem->Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libjhugenmela.so","", kTRUE);',
-#                    '.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/RecoMELA_VBF.cc+'],
-#    'class' : 'D_VBF',
-#    'args': 'nCleanJet,nLepton,PuppiMET_pt,PuppiMET_phi,Lepton_pt[0],Lepton_pt[1],Lepton_phi[0],Lepton_phi[1],Lepton_eta[0],Lepton_eta[1],CleanJet_pt[0],CleanJet_pt[1],CleanJet_phi[0],CleanJet_phi[1],CleanJet_eta[0],CleanJet_eta[1],Lepton_pdgId[0],Lepton_pdgId[1]',
-#}
 
 aliases['D_ME'] = {
   'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libmcfm_708.so","", ROOT.kTRUE);',
@@ -379,6 +348,91 @@ aliases['D_ME'] = {
 aliases['D_VBF_QCD'] = {
     'expr': 'D_ME[0]',
 }
+
+aliases['D_VBF_VH'] = {
+    'expr': 'D_ME[0]',
+}
+
+aliases['D_QCD_VH'] = {
+    'expr': 'D_ME[0]',
+}
+
+aliases['Ctot'] = {
+    'expr': 'detajj!=0 ? log((abs(2 * Lepton_eta[0] - CleanJet_eta[0] - CleanJet_eta[1]) + abs(2 * Lepton_eta[1] - CleanJet_eta[0] - CleanJet_eta[1])) / detajj) : -1.0',
+}
+
+aliases['btagDeepFlavB'] = {
+    'expr': 'Alt(Jet_btagDeepFlavB, Alt(CleanJet_jetIdx, 0, -1), -2.0)',
+}
+
+aliases['btagDeepFlavB_1'] = {
+    'expr': 'Alt(Jet_btagDeepFlavB, Alt(CleanJet_jetIdx, 1, -1), -2.0)',
+}
+
+aliases['RandomForest_evaluator'] = {
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2018_v9/evaluate_RF_polarization.cc+'],
+    'class' : 'evaluate_dnn',
+    'args': 'mll,mth,mtw1,mtw2,mjj,mcollWW,ptll,Ctot,Lepton_pt,Lepton_eta,Lepton_phi,dphilmet1,dphilmet2,dphill,detall,dphijj,detajj,dphilep1jet1,dphilep2jet1,dphilep1jet2,dphilep2jet2,btagDeepFlavB,btagDeepFlavB_1,drll,mpmet,PuppiMET_pt,PuppiMET_phi,D_VBF_QCD,D_VBF_VH,D_QCD_VH',
+}
+
+
+
+#### 0 Jets
+aliases['RF_score_0J_LL'] = {
+    'expr': 'RandomForest_evaluator[0][0]',
+}
+aliases['RF_score_0J_TT'] = {
+    'expr': 'RandomForest_evaluator[0][1]',
+}
+aliases['RF_score_0J_Bkg'] = {
+    'expr': 'RandomForest_evaluator[0][2]',
+}
+
+
+#### 1 Jets
+aliases['RF_score_1J_LL'] = {
+    'expr': 'RandomForest_evaluator[1][0]',
+}
+aliases['RF_score_1J_TT'] = {
+    'expr': 'RandomForest_evaluator[1][1]',
+}
+aliases['RF_score_1J_Bkg'] = {
+    'expr': 'RandomForest_evaluator[1][2]',
+}
+
+
+#### 2 Jets
+aliases['RF_score_2J_LL'] = {
+    'expr': 'RandomForest_evaluator[2][0]',
+}
+aliases['RF_score_2J_TT'] = {
+    'expr': 'RandomForest_evaluator[2][1]',
+}
+aliases['RF_score_2J_Bkg'] = {
+    'expr': 'RandomForest_evaluator[2][2]',
+}
+
+
+#### VBF
+aliases['RF_score_VBF_LL'] = {
+    'expr': 'RandomForest_evaluator[3][0]',
+}
+aliases['RF_score_VBF_TT'] = {
+    'expr': 'RandomForest_evaluator[3][1]',
+}
+aliases['RF_score_VBF_Bkg'] = {
+    'expr': 'RandomForest_evaluator[3][2]',
+}
+
+
+
+
+
+
+
+
+
+'''
 
 ###
 ### BDT GGF 2J
@@ -406,8 +460,21 @@ aliases['BDTG4D3_VBF'] = {
 ### BDT Polarization
 ###
 
+#aliases['BDTG4D3_Pol'] = {
+#    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_Pol.cc+'],
+#    'class' : 'TMVA_HWW_Pol',
+#    'args': 'nLepton,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,mll,ptll,dphill,mcollWW,pTWW,mtw1,mtw2,drll,mth,dphilmet,mpmet,detall',
+#}
+
+
+####
+#### Random Forest polarization
+####
+
 aliases['BDTG4D3_Pol'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_Pol.cc+'],
-    'class' : 'TMVA_HWW_Pol',
-    'args': 'nLepton,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,mll,ptll,dphill,mcollWW,pTWW,mtw1,mtw2,drll,mth,dphilmet,mpmet,detall',
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2018_v9/evaluate_RF_polarization.cc+'],
+    'class' : 'evaluate_dnn',
+    'args': 'mll,mth,mtw1,mtw2,mcollWW,ptll,Lepton_pt,Lepton_eta,Lepton_phi,dphilmet1,dphilmet2,dphill,detall,drll,mpmet,PuppiMET_pt,PuppiMET_phi',
 }
+
+'''

@@ -1,6 +1,83 @@
 
 variables = {}
 
+variables['RF_0J_LL']  = {   'name': 'RF_score_0J_LL',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 0J LL',
+                             'fold' : 3 
+                         } 
+variables['RF_0J_TT']  = {   'name': 'RF_score_0J_TT',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 0J TT',
+                             'fold' : 3
+                         }
+variables['RF_0J_Bkg']  = {   'name': 'RF_score_0J_Bkg',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score 0J Background',
+                              'fold' : 3
+                          }
+
+
+
+variables['RF_1J_LL']  = {   'name': 'RF_score_1J_LL',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 1J LL',
+                             'fold' : 3
+                         }
+variables['RF_1J_TT']  = {   'name': 'RF_score_1J_TT',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 1J TT',
+                             'fold' : 3
+                         }
+variables['RF_1J_Bkg']  = {   'name': 'RF_score_1J_Bkg',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score 1J Background',
+                              'fold' : 3
+                          }
+
+
+
+variables['RF_2J_LL']  = {   'name': 'RF_score_2J_LL',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 2J LL',
+                             'fold' : 3
+                         }
+variables['RF_2J_TT']  = {   'name': 'RF_score_2J_TT',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 2J TT',
+                             'fold' : 3
+                         }
+variables['RF_2J_Bkg']  = {   'name': 'RF_score_2J_Bkg',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score 2J Background',
+                              'fold' : 3
+                          }
+
+
+
+variables['RF_VBF_LL']  = {   'name': 'RF_score_VBF_LL',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score VBF LL',
+                              'fold' : 3
+                          }
+variables['RF_VBF_TT']  = {   'name': 'RF_score_VBF_TT',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score VBF TT',
+                              'fold' : 3
+                          }
+variables['RF_VBF_Bkg']  = {   'name': 'RF_score_VBF_Bkg',
+                               'range' : (40,0,1),
+                               'xaxis' : 'Random Forest score VBF Background',
+                               'fold' : 3
+                           }
+
+
+variables['events']  = {   'name': '1', 
+                        'range' : (1,0,2),
+                        'xaxis' : 'events', 
+                        'fold' : 3  
+                        } 
+
 '''
 variables['BDT_0J']  = {   'name': 'BDTG4D3_0J',
                            'range' : (40,-1,1),
@@ -47,7 +124,7 @@ variables['BDT_VBF_WP50']  = {   'name': 'BDTG4D3_VBF',
                                 'fold' : 0
                         }
 
-'''
+
 ###### POLARIZATION
 
 variables['BDTG4D3_Pol']  = {   'name': 'BDTG4D3_Pol',
@@ -100,25 +177,8 @@ variables['events']  = {   'name': '1',
                         'fold' : 3
                         }
 
-variables['dphijj']  = {   'name': 'dphijj',
-                           'range' : (20,0,3.15),
-                           'xaxis' : 'events',
-                           'fold' : 3
-                       }
 
-variables['dphijj_2']  = {   'name': '(Alt(CleanJet_phi,0,0)>=Alt(CleanJet_phi,1,0))*(Alt(CleanJet_phi,0,0)-Alt(CleanJet_phi,1,0)) + (Alt(CleanJet_phi,0,0)<Alt(CleanJet_phi,1,0))*(Alt(CleanJet_phi,1,0)-Alt(CleanJet_phi,0,0))',
-                             'range' : (20,0,3.15),
-                             'xaxis' : 'events',
-                             'fold' : 3
-                         }
 
-variables['dphijj_3']  = {   'name': 'Alt(CleanJet_phi,0,0)-Alt(CleanJet_phi,1,0)',
-                             'range' : (20,0,3.15),
-                             'xaxis' : 'events',
-                             'fold' : 3
-                         }
-
-'''
 variables['nvtx']  = {   'name': 'PV_npvsGood',
                        'range' : (20,0,100),
                        'xaxis' : 'nvtx',
