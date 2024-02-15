@@ -45,10 +45,26 @@ structure['Wg']  = {
                   'isData'   : 0 
                   }
 
-structure['Vg']  = { 
+structure['Wg']  = { 
                   'isSignal' : 0,
                   'isData'   : 0 
                   }
+
+structure['Zg']  = {
+                  'isSignal' : 0,
+                  'isData'   : 0
+                  }
+
+structure['WgS'] = { 
+                  'isSignal' : 0,
+                  'isData'   : 0 
+                  }
+
+structure['ZgS'] = {
+                  'isSignal' : 0,
+                  'isData'   : 0
+                  }
+
 structure['VZ']  = { 
                   'isSignal' : 0,
                   'isData'   : 0 
@@ -71,7 +87,7 @@ structure['ZZ']  = {
                   }
 
 structure['ggH_hww'] = {
-                  'isSignal' : 0,
+                  'isSignal' : 1,
                   'isData'   : 0,
                   'scaleSampleForDatacard' : {cut : 1.03364 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38
                   }
@@ -84,7 +100,7 @@ structure['qqH_hww'] = {
 
 
 ###### POLARIZED SIGNALS
-'''
+
 structure['ggH_HWLWL'] = {
                   'isSignal' : 1,
                   'isData'   : 0,
@@ -97,14 +113,14 @@ structure['ggH_HWTWT'] = {
                   'scaleSampleForDatacard' : {cut : 1.03364 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38
                   }
 
-
+'''
 structure['ggH_HWW_Int'] = {
                   'isSignal' : 1,
                   'isData'   : 0,
                   'scaleSampleForDatacard' : {cut : 1.03364 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38                                                                                  
                   }
-'''
 
+'''
 
 structure['qqH_HWLWL'] = {
                   'isSignal' : 1,
@@ -118,6 +134,26 @@ structure['qqH_HWTWT'] = {
                   'scaleSampleForDatacard' : {cut : 1.03621 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38
                   }
 
+
+#structure['ggH_gWW_Int'] = {
+#    'isSignal' : 1,
+#    'isData'   : 0,
+#}
+
+#structure['qqH_qqWW_Int'] = {
+#    'isSignal' : 1,
+#    'isData'   : 0,
+#}
+
+structure['ggToWW'] = {
+    'isSignal' : 1,
+    'isData'   : 0,
+}
+
+structure['qqToWW'] = {
+    'isSignal' : 1,
+    'isData'   : 0,
+}
 
 ############
 

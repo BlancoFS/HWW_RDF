@@ -25,6 +25,12 @@ aliases['LepWPSF'] = {
     'samples': mc
 }
 
+aliases['CleanJet_VetoMap'] = {
+    'linesToAdd': [".L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/Full2016_HIPM/jet_veto_2016.cc+"],
+    'class' : 'Jet_Veto',
+    'args': 'CleanJet_pt,CleanJet_eta,CleanJet_phi,Jet_neEmEF,Jet_chEmEF,CleanJet_jetIdx',
+}
+
 aliases['gstarLow'] = {
     'expr': 'Gen_ZGstar_mass >0 && Gen_ZGstar_mass < 4',
     'samples': mc
@@ -89,7 +95,7 @@ aliases['Top_pTrw'] = {
 
 aliases['nCleanGenJet'] = {
     #'linesToAdd': ['/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2017_v9/ngenjet.cc'],
-    'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_HIPM/ngenjet.cc+'],
+    'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/ngenjet.cc+'],
     'class': 'CountGenJet',
     'args': 'nLeptonGen, LeptonGen_isPrompt,\
         LeptonGen_pdgId, LeptonGen_pt, LeptonGen_eta, LeptonGen_phi, \
@@ -101,7 +107,7 @@ aliases['nCleanGenJet'] = {
 ##### DY Z pT reweighting
 aliases['getGenZpt_OTF'] = {
     #'linesToAdd': ['/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2017_v9/getGenZpt.cc'],
-    'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_HIPM/getGenZpt.cc+'],
+    'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/getGenZpt.cc+'],
     'class': 'getGenZpt',
     'args': 'nGenPart, GenPart_pt, GenPart_pdgId, GenPart_genPartIdxMother, GenPart_statusFlags, gen_ptll',
     'samples': ['DY']
@@ -181,19 +187,19 @@ aliases['bReqSF'] = {
 
 # Top control region                                                                                                                                                                                       
 aliases['topcr'] = {
-    'expr': 'mth>40 && PuppiMET_pt>20 && mll > 12 && ((zeroJet && !bVeto) || bReq)'
+    'expr': 'mth>40 && PuppiMET_pt>20 && mll > 12 && ((zeroJet && !bVeto) || bReq) && Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13'
 }
 
 aliases['dycr'] = {
-    'expr': 'mth<40 && PuppiMET_pt>20 && mll>12 && bVeto'
+    'expr': 'mth<40 && PuppiMET_pt>20 && mll>12 && bVeto && Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13'
 }
 
 aliases['wwcr'] = {
-    'expr': 'mth>40 && PuppiMET_pt>20 && bVeto && mll>12 && mpmet>20'
+    'expr': 'mth>40 && PuppiMET_pt>20 && bVeto && mll>12 && mpmet>20 && Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13'
 }
 
 aliases['sr'] = {
-    'expr': 'mth>40 && PuppiMET_pt>20 && bVeto && mll > 12'
+    'expr': 'mth>40 && PuppiMET_pt>20 && bVeto && mll > 12 && Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13'
 }
 
 # Overall b tag SF
@@ -279,10 +285,10 @@ aliases['SFweightMuDown'] = {
 
 aliases['Weight2MINLO'] = {
     #'linesToAdd': ['/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2017_v9/weight2MINLO.cc'],
-    'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_HIPM/weight2MINLO.cc+'],
+    'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/weight2MINLO.cc+'],
     'class': 'Weight2MINLO',
     'args': '"NNLOPS_reweight.root", HTXS_njets30, HTXS_Higgs_pt',
-    'samples': ['ggH_hww', 'ggH_HWLWL', 'ggH_HWTWT', 'ggH_HWW_Int', 'ggH_HWW_TTInt']
+    'samples': ['ggH_hww', 'ggH_HWLWL', 'ggH_HWTWT', 'ggH_HWW_Int', 'ggH_HWW_TTInt','ggH_gWW_Int', 'ggH_gWW_Tot']
 }
 
 
@@ -302,7 +308,7 @@ thus = [
 for thu in thus:
     aliases[thu+'_2'] = {
         #'linesToAdd': ['/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2017_v9/gghuncertainty.cc'],
-        'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/gghuncertainty.cc+'],
+        'linesToAdd': ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/gghuncertainty.cc+'],
         'class': 'GGHUncertainty',
         'args': '"{}", HTXS_njets30, HTXS_Higgs_pt, HTXS_stage_1_pTjet30'.format(thu),
         'samples': ['ggH_hww', 'ggH_HWLWL', 'ggH_HWTWT', 'ggH_HWW_Int', 'ggH_HWW_TTInt']
@@ -314,7 +320,7 @@ for thu in thus:
 ####
 
 aliases['Higgs_WW_Rew'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/doHiggsPolarization.cc+'],
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/doHiggsPolarization.cc+'],
     'class' : 'DoHiggsPolarizationWeight',
     'args': 'GenPart_pt, GenPart_eta, GenPart_phi, GenPart_mass, GenPart_pdgId, GenPart_status, GenPart_genPartIdxMother',
     'samples' : ['ggH_HWLWL', 'ggH_HWTWT', 'ggH_HWW_Int', 'ggH_HWW_TTInt', 'qqH_HWLWL', 'qqH_HWTWT'],
@@ -340,72 +346,181 @@ aliases['Higgs_WW_TTInt'] = {
     'samples': ['ggH_HWLWL', 'ggH_HWTWT', 'ggH_HWW_Int', 'ggH_HWW_TTInt', 'qqH_HWLWL', 'qqH_HWTWT'],
 }
 
-###
-### BDT GGF 0J
-###
-
-aliases['BDTG4D3_0J'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_0J.cc+'],
-    'class' : 'TMVA_HWW_0J',
-    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,mpmet,detall',
+aliases['HWW_interference'] = {
+  'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libmcfm_705.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libJHUGenMELAMELA.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/IvyFramework/IvyDataTools/lib/libIvyFrameworkIvyDataTools.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/IvyFramework/IvyAutoMELA/lib/libIvyFrameworkIvyAutoMELA.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/MelaAnalytics/GenericMEComputer/lib/libMelaAnalyticsGenericMEComputer.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/MelaAnalytics/EventContainer/lib/libMelaAnalyticsEventContainer.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/MelaAnalytics/CandidateLOCaster/lib/libMelaAnalyticsCandidateLOCaster.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/doGenInterference_2016HIPM_cc.so","", ROOT.kTRUE)',
+                    'ROOT.gInterpreter.Declare("GEN_INTERFERENCE_2016 b;")'],
+   'expr' :   'b(nLHEPart,LHEPart_pt,LHEPart_eta,LHEPart_phi,LHEPart_mass,LHEPart_incomingpz,LHEPart_pdgId,LHEPart_status,LHEPart_spin,GenPart_genPartIdxMother,GenPart_pdgId,GenPart_status,GenPart_pt,GenPart_eta,GenPart_phi,GenPart_mass,Generator_x1,Generator_x2,Generator_id1,Generator_id2)',
+    'samples': ['ggH_gWW_Int', 'ggH_gWW_Tot','qqH_qqWW_Int', 'qqH_qqWW_Tot'],
 }
 
-###
-### BDT GGF 1J
-### 
-
-aliases['BDTG4D3_1J'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_1J.cc+'],
-    'class' : 'TMVA_HWW_1J',
-    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,dphilep1jet1,dphilep2jet1,mpmet,detall',
+aliases['ggHWW_Interference'] = {
+    'expr': '(HWW_interference[0]+HWW_interference[2])!=0.0 ? (HWW_interference[1]-HWW_interference[0]-HWW_interference[2]) / (HWW_interference[0]+HWW_interference[2]) : 0.0',
+    'samples': ['ggH_gWW_Int', 'ggH_gWW_Tot', 'ggH_Int', 'ggH_Tot', 'ggWW_Int', 'ggWW_Tot'],
 }
 
-###
-### VBF GGF Matrix Element
-###
+aliases['ggHWW_Total'] = {
+    'expr': '(HWW_interference[0]+HWW_interference[2])!=0.0 ? HWW_interference[1] / (HWW_interference[0]+HWW_interference[2]) : 0.0',
+    'samples': ['ggH_gWW_Int', 'ggH_gWW_Tot', 'ggH_Int', 'ggH_Tot', 'ggWW_Int', 'ggWW_Tot'],
+}
+
+aliases['qqHWW_Interference'] = {
+    'expr': '(HWW_interference[3]+HWW_interference[5])!=0.0 ? (HWW_interference[4]-HWW_interference[3]-HWW_interference[5]) / (HWW_interference[3]+HWW_interference[5]) : 0.0',
+    'samples': ['qqH_qqWW_Int', 'qqH_qqWW_Tot'],
+}
+
+aliases['qqHWW_Total'] = {
+    'expr': '(HWW_interference[3]+HWW_interference[5])!=0.0 ? HWW_interference[4] / (HWW_interference[3]+HWW_interference[5]) : 1.0',
+    'samples': ['qqH_qqWW_Int', 'qqH_qqWW_Tot'],
+}
 
 aliases['D_ME'] = {
-  'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libmcfm_708.so","", ROOT.kTRUE);',
-                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libJHUGenMELAMELA.so","", ROOT.kTRUE);',
-                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_HIPM/RecoMELA_VBF_cc.so","", ROOT.kTRUE);',
+  'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libmcfm_705.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/JHUGenMELA/MELA/data/slc7_amd64_gcc920/libJHUGenMELAMELA.so","", ROOT.kTRUE)',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/RecoMELA_VBF_cc.so","", ROOT.kTRUE)',
                     'ROOT.gInterpreter.Declare("RECOMELA_VBF a;")'],
    'expr' :   'a(nCleanJet, nLepton, PuppiMET_pt, PuppiMET_phi, Lepton_pt, Lepton_phi, Lepton_eta, CleanJet_pt, CleanJet_phi, CleanJet_eta, Lepton_pdgId)',
+    'afterNuis': True
 }
 
 aliases['D_VBF_QCD'] = {
     'expr': 'D_ME[0]',
+    'afterNuis': True
 }
 
-###
-### BDT GGF 2J
-###
+aliases['D_VBF_VH'] = {
+    'expr': 'D_ME[1]',
+    'afterNuis': True
+}
+
+aliases['D_QCD_VH'] = {
+    'expr': 'D_ME[2]',
+    'afterNuis': True
+}
+
+
+aliases['D_VBF_DY'] = {
+  'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/lib/libmomemta.so","", ROOT.kTRUE);',
+                    'ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/RecoMoMEMta_VBF_cc.so","", ROOT.kTRUE)',
+                    'ROOT.gInterpreter.Declare("RecoMoMEMta_VBF EvMoMEMta;")'],
+   'expr' :   'EvMoMEMta(nCleanJet, nLepton, PuppiMET_pt, PuppiMET_phi, Lepton_pt[0], Lepton_pt[1], Lepton_phi[0], Lepton_phi[1], Lepton_eta[0], Lepton_eta[1], CleanJet_pt[0], CleanJet_pt[1], CleanJet_phi[0], CleanJet_phi[1], CleanJet_eta[0], CleanJet_eta[1], Lepton_pdgId[0], Lepton_pdgId[1])',
+    'afterNuis': True
+}
+
+aliases['Ctot'] = {
+    'expr': 'detajj!=0 ? log((abs(2 * Lepton_eta[0] - CleanJet_eta[0] - CleanJet_eta[1]) + abs(2 * Lepton_eta[1] - CleanJet_eta[0] - CleanJet_eta[1])) / detajj) : -1.0',
+    'afterNuis': True
+}
+
+aliases['btagDeepFlavB'] = {
+    'expr': 'Alt(Jet_btagDeepFlavB, Alt(CleanJet_jetIdx, 0, -1), -2.0)',
+    'afterNuis': True
+}
+
+aliases['btagDeepFlavB_1'] = {
+    'expr': 'Alt(Jet_btagDeepFlavB, Alt(CleanJet_jetIdx, 1, -1), -2.0)',
+    'afterNuis': True
+}
+
+
+aliases['RandomForest_evaluator'] = {
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/evaluate_RF_polarization.cc+'],
+    'class' : 'evaluate_dnn',
+    'args': 'mll,mth,mtw1,mtw2,mjj,mcollWW,ptll,Ctot,Lepton_pt,Lepton_eta,Lepton_phi,dphilmet1,dphilmet2,dphill,detall,dphijj,detajj,dphilep1jet1,dphilep2jet1,dphilep1jet2,dphilep2jet2,btagDeepFlavB,btagDeepFlavB_1,drll,mpmet,PuppiMET_pt,PuppiMET_phi,D_VBF_QCD,D_VBF_VH,D_QCD_VH,D_VBF_DY',
+    'afterNuis': True
+}
+
+aliases['RF_score_0J_LL'] = {
+    'expr': 'RandomForest_evaluator[0][0]',
+    'afterNuis': True
+}
+aliases['RF_score_0J_TT'] = {
+    'expr': 'RandomForest_evaluator[0][1]',
+    'afterNuis': True
+}
+aliases['RF_score_0J_Bkg'] = {
+    'expr': 'RandomForest_evaluator[0][2]',
+    'afterNuis': True
+}
+aliases['RF_score_1J_LL'] = {
+    'expr': 'RandomForest_evaluator[1][0]',
+    'afterNuis': True
+}
+aliases['RF_score_1J_TT'] = {
+    'expr': 'RandomForest_evaluator[1][1]',
+    'afterNuis': True
+}
+aliases['RF_score_1J_Bkg'] = {
+    'expr': 'RandomForest_evaluator[1][2]',
+    'afterNuis': True
+}
+aliases['RF_score_2J_LL'] = {
+    'expr': 'RandomForest_evaluator[2][0]',
+    'afterNuis': True
+}
+aliases['RF_score_2J_TT'] = {
+    'expr': 'RandomForest_evaluator[2][1]',
+    'afterNuis': True
+}
+aliases['RF_score_2J_Bkg'] = {
+    'expr': 'RandomForest_evaluator[2][2]',
+    'afterNuis': True
+}
+aliases['RF_score_VBF_LL'] = {
+    'expr': 'RandomForest_evaluator[3][0]',
+    'afterNuis': True
+}
+aliases['RF_score_VBF_TT'] = {
+    'expr': 'RandomForest_evaluator[3][1]',
+    'afterNuis': True
+}
+aliases['RF_score_VBF_Bkg'] = {
+    'expr': 'RandomForest_evaluator[3][2]',
+    'afterNuis': True
+}
+
+
+'''
+aliases['RF_score_0J_Pol'] = {
+    'expr': 'RandomForest_evaluator[4][0]',
+}
+aliases['RF_score_1J_Pol'] = {
+    'expr': 'RandomForest_evaluator[5][0]',
+}
+aliases['RF_score_2J_Pol'] = {
+    'expr': 'RandomForest_evaluator[6][0]',
+}
+aliases['RF_score_VBF_Pol'] = {
+    'expr': 'RandomForest_evaluator[7][0]',
+}
+
+aliases['BDTG4D3_0J'] = {
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/TMVA_GGF_0J.cc+'],
+    'class' : 'TMVA_HWW_0J',
+    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,mpmet,detall',
+}
+
+aliases['BDTG4D3_1J'] = {
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/TMVA_GGF_1J.cc+'],
+    'class' : 'TMVA_HWW_1J',
+    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,dphilep1jet1,dphilep2jet1,mpmet,detall',
+}
 
 aliases['BDTG4D3_2J'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_2J.cc+'],
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/TMVA_GGF_2J.cc+'],
     'class' : 'TMVA_HWW_2J',
-    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,dphilep1jet1,dphilep2jet1,dphilep1jet2,dphilep2jet2,dphijj,mpmet,detall',
+    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,dphilep1jet1,dphilep2jet1,dphilep1jet2,dphilep2jet2,dphijj,mpmet,detall,Ctot,D_VBF_QCD,D_VBF_VH,D_QCD_VH,D_VBF_DY',
 }
-
-###
-### BDT VBF 2J
-###
 
 aliases['BDTG4D3_VBF'] = {
-    'linesToAdd' : [
-        'gSystem->Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/myenv/lib/libmomemta.so","", kTRUE);',
-        '.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_HIPM/TMVA_VBF_2J.cc+'],
+    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/TMVA_VBF_2J.cc+'],
     'class' : 'TMVA_HWW_VBF',
-    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,Jet_qgl,PuppiMET_pt,PuppiMET_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,CleanJet_jetIdx,Jet_btagDeepFlavB,D_ME[0],D_ME[1],D_ME[2]',
+    'args': 'nLepton,nCleanJet,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,CleanJet_pt,CleanJet_eta,CleanJet_phi,mjj,mll,ptll,detajj,dphill,dphijjmet,mtw1,mtw2,drll,mth,PuppiMET_pt,PuppiMET_phi,CleanJet_jetIdx,Jet_btagDeepFlavB,dphilmet1,dphilmet2,dphilep1jet1,dphilep2jet1,dphilep1jet2,dphilep2jet2,dphijj,mpmet,detall,Ctot,D_VBF_QCD,D_VBF_VH,D_QCD_VH,D_VBF_DY',
 }
-
-### 
-### BDT Polarization 
-### 
-
-aliases['BDTG4D3_Pol'] = {
-    'linesToAdd' : ['.L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/TMVA_GGF_Pol.cc+'],
-    'class' : 'TMVA_HWW_Pol',
-    'args': 'nLepton,Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_phi,mll,ptll,dphill,mcollWW,pTWW,mtw1,mtw2,drll,mth,dphilmet,mpmet,detall',
-}
-
-
+'''

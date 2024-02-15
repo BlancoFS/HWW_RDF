@@ -247,7 +247,6 @@ samples['VVV'] = {
 
 signals = []
 
-
 ############ ggH H->WW ############
 samples['ggH_hww'] = {
     'name': nanoGetSampleFiles(mcDirectory, 'GluGluHToWWTo2L2Nu_M125') + nanoGetSampleFiles(mcDirectory, 'GGHjjToWWTo2L2Nu_minloHJJ_M125'),                                                                                                                        
@@ -268,7 +267,6 @@ samples['qqH_hww'] = {
     'FilesPerJob': 1,
     #'EventsPerJob': 25000
 }
-
 
 
 ############ ZH H->WW ############
@@ -401,38 +399,62 @@ samples['qqH_HWTWT'] = {
 signals.append('qqH_HWTWT')
 
 
-'''
-######################                                                                                                                                                                                     
-#      ggH Int       #                                                                                                                                                                                     
-######################                                                                                                                                                                                                                                                         
-
-samples['ggH_HWW_Int'] = {
-    'name': nanoGetSampleFiles(mcDirectory, 'GluGluHToWWTo2L2Nu_M125') + nanoGetSampleFiles(mcDirectory, 'GGHjjToWWTo2L2Nu_minloHJJ_M125'), 
-    'weight': mcCommonWeight + '*(Higgs_WW_Int)',
+########### ggH+ggWW Interference ########
+samples['ggH_gWW_Int'] = {
+    'name': nanoGetSampleFiles(mcDirectory, 'GluGluHToWWTo2L2Nu_M125') + \
+            nanoGetSampleFiles(mcDirectory, 'GGHjjToWWTo2L2Nu_minloHJJ_M125') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENEN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENMN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToENTN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNEN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNMN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToMNTN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNEN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNMN') + \
+            nanoGetSampleFiles(mcDirectory, 'GluGluToWWToTNTN'),
+    'weight': mcCommonWeight + '*ggHWW_Interference',
     'FilesPerJob': 1,
-    'EventsPerJob': 25000
 }
 
-addSampleWeight(samples, 'ggH_HWW_Int', 'GluGluHToWWTo2L2Nu_M125', '(HTXS_stage1_1_cat_pTjet30GeV<107)*Weight2MINLO*1092.7640/1073.2567') #only non GE2J categories with the weight to NNLOPS and renormalize integral                                                       
-addSampleWeight(samples, 'ggH_HWW_Int', 'GGHjjToWWTo2L2Nu_minloHJJ_M125', '(HTXS_stage1_1_cat_pTjet30GeV>106)*1092.7640/1073.2567')                                                                                                                                           
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluHToWWTo2L2Nu_M125', '(HTXS_stage1_1_cat_pTjet30GeV<107)*Weight2MINLO*1092.7640/1073.2567')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GGHjjToWWTo2L2Nu_minloHJJ_M125', '(HTXS_stage1_1_cat_pTjet30GeV>106)*1092.7640/1073.2567')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToENEN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToENMN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToENTN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToMNEN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToMNMN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToMNTN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToTNEN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToTNMN', '1.53/1.4')
+addSampleWeight(samples, 'ggH_gWW_Int', 'GluGluToWWToTNTN', '1.53/1.4')
 
-signals.append('ggH_HWW_Int')
-'''
 
-'''
-samples['ggH_HWW_TTInt'] = {
-    'name': nanoGetSampleFiles(mcDirectory, 'GluGluHToWWTo2L2Nu_M125') + nanoGetSampleFiles(mcDirectory, 'GGHjjToWWTo2L2Nu_minloHJJ_M125'),
-    'weight': mcCommonWeight + '*(Higgs_WW_TTInt)',
+############ VBF+qqWW Interference ###########
+samples['qqH_qqWW_Int'] = {
+    'name': nanoGetSampleFiles(mcDirectory, 'VBFHToWWTo2L2Nu_M125') + nanoGetSampleFiles(mcDirectory, 'WWTo2L2Nu') + nanoGetSampleFiles(mcDirectory, 'WpWmJJ_EWK_noTop'),
+    'weight': mcCommonWeight + '*qqHWW_Interference',
     'FilesPerJob': 1,
-    'EventsPerJob': 25000
 }
 
-addSampleWeight(samples, 'ggH_HWW_TTInt', 'GluGluHToWWTo2L2Nu_M125', '(HTXS_stage1_1_cat_pTjet30GeV<107)*Weight2MINLO*1092.7640/1073.2567') #only non GE2J categories with the weight to NNLOPS and renormalize integral                                                     
-addSampleWeight(samples, 'ggH_HWW_TTInt', 'GGHjjToWWTo2L2Nu_minloHJJ_M125', '(HTXS_stage1_1_cat_pTjet30GeV>106)*1092.7640/1073.2567')                                                                                                                                        
+addSampleWeight(samples, 'qqH_qqWW_Int', 'WpWmJJ_EWK_noTop', '(Sum(abs(GenPart_pdgId)==6 || GenPart_pdgId==25)==0)')
+addSampleWeight(samples, 'qqH_qqWW_Int', 'WWTo2L2Nu', 'nllW*ewknloW')
 
-signals.append('ggH_HWW_TTInt')
+
 '''
+###### Dummy Total histograms for mkDatacards
 
+samples['ggToWW'] = {
+    'name': [],
+    'weight': mcCommonWeight,
+    'FilesPerJob': 1,
+}
+
+samples['qqToWW'] = {
+    'name': [],
+    'weight': mcCommonWeight,
+    'FilesPerJob': 1,
+}
+'''
 
 ###########################################
 ################## FAKE ###################
@@ -443,7 +465,7 @@ samples['Fake'] = {
   'weight': 'METFilter_DATA*fakeW',
   'weights': [],
   'isData': ['all'],
-  'FilesPerJob': 15
+  'FilesPerJob': 10
 }
 
 for _, sd in DataRun:
@@ -473,7 +495,7 @@ samples['DATA'] = {
   'weight': 'LepWPCut*METFilter_DATA',
   'weights': [],
   'isData': ['all'],
-  'FilesPerJob': 15
+  'FilesPerJob': 10
 }
 
 for _, sd in DataRun:
