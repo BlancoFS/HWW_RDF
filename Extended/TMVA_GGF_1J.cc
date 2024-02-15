@@ -114,6 +114,9 @@ float TMVA_HWW_1J(
   float ptll_user = ptll;
   float drll_user = drll;
   float detall_user = detall;
+  float dphill_user = dphill;
+  float PuppiMET_pt_user = PuppiMET_pt;
+  float PuppiMET_phi_user = PuppiMET_phi;
   float dphilep1jet1_user = dphilep1jet1;
   float dphilep2jet1_user = dphilep2jet1;
   float btag_user = (float)Jet_btagDeepFlavB_CleanJet_jetIdx_0_;
@@ -121,22 +124,24 @@ float TMVA_HWW_1J(
     
   TMVA::Reader *reader_1j = new TMVA::Reader( "!Color:Silent" );
   
-  reader_1j->AddVariable("dphilmet1", &dphilmet1_user);
-  reader_1j->AddVariable("dphilmet2", &dphilmet2_user);
-  reader_1j->AddVariable("mpmet", &mpmet_user);
   reader_1j->AddVariable("mll", &mll_user);
   reader_1j->AddVariable("mth", &mth_user);
   reader_1j->AddVariable("mtw1", &mtw1_user);
   reader_1j->AddVariable("mtw2", &mtw2_user);
   reader_1j->AddVariable("ptll", &ptll_user);
   reader_1j->AddVariable("drll", &drll_user);
+  reader_1j->AddVariable("dphilmet1", &dphilmet1_user);
+  reader_1j->AddVariable("dphilmet2", &dphilmet2_user);
+  reader_1j->AddVariable("dphill", &dphill_user);
+  reader_1j->AddVariable("PuppiMET_pt", &PuppiMET_pt_user);
+  reader_1j->AddVariable("PuppiMET_phi", &PuppiMET_phi_user);
   reader_1j->AddVariable("detall", &detall_user);
+  reader_1j->AddVariable("mpmet", &mpmet_user);
   reader_1j->AddVariable("dphilep1jet1", &dphilep1jet1_user);
   reader_1j->AddVariable("dphilep2jet1", &dphilep2jet1_user);
-  reader_1j->AddVariable("btagDeepFlavB", &btag_user);
-  reader_1j->AddVariable("btagDeepFlavB_1", &btag_user_1);
-  
-  TString dir    = "/afs/cern.ch/work/s/sblancof/private/Run2Analysis/mkShapesRDF/examples/Full2016_noHIPM/dataset_for_ggH_1J/weights/";
+  reader_1j->AddVariable("btagDeepFlavB", &btag_user);  
+
+  TString dir    = "/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/Training/dataset_Binary_1J_DF/weights/";
   TString prefix = "TMVAClassification";
   
   TString methodName = TString("BDTG4D3") + TString(" method");

@@ -135,6 +135,26 @@ structure['qqH_HWTWT'] = {
                   }
 
 
+#structure['ggH_gWW_Int'] = {
+#    'isSignal' : 1,
+#    'isData'   : 0,
+#}
+
+#structure['qqH_qqWW_Int'] = {
+#    'isSignal' : 1,
+#    'isData'   : 0,
+#}
+
+structure['ggToWW'] = {
+    'isSignal' : 1,
+    'isData'   : 0,
+}
+
+structure['qqToWW'] = {
+    'isSignal' : 1,
+    'isData'   : 0,
+}
+
 ############
 
 structure['WH_hww_plus'] = {

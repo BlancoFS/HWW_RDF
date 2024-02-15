@@ -58,7 +58,6 @@ public:
 
       if (absId1*absId2 != -11*13) {
 	me = {-9999., -9999., -9999.};
-	mela->resetInputEvent();       
 	return me;
       }
 
@@ -90,7 +89,6 @@ public:
      
       if (Higgs.Pt() == 0 || Higgs.M()==0 || Lepton_pt[0] < 10 || Lepton_pt[1] < 10 || CleanJet_pt[0] < 30 || CleanJet_pt[1] < 30){
 	me = {-9999., -9999., -9999.};
-	mela->resetInputEvent();       
 	return me;
       }
       
@@ -134,7 +132,6 @@ public:
     }
     else {
       me = {-9999., -9999., -9999.};
-      mela->resetInputEvent();       
       return me;
     }
   }

@@ -1,6 +1,84 @@
 
 variables = {}
 
+
+variables['RF_0J_LL']  = {   'name': 'RF_score_0J_LL',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 0J LL',
+                             'fold' : 3 
+                         } 
+variables['RF_0J_TT']  = {   'name': 'RF_score_0J_TT',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 0J TT',
+                             'fold' : 3
+                         }
+variables['RF_0J_Bkg']  = {   'name': 'RF_score_0J_Bkg',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score 0J Background',
+                              'fold' : 3
+                          }
+
+
+
+variables['RF_1J_LL']  = {   'name': 'RF_score_1J_LL',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 1J LL',
+                             'fold' : 3
+                         }
+variables['RF_1J_TT']  = {   'name': 'RF_score_1J_TT',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 1J TT',
+                             'fold' : 3
+                         }
+variables['RF_1J_Bkg']  = {   'name': 'RF_score_1J_Bkg',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score 1J Background',
+                              'fold' : 3
+                          }
+
+
+
+variables['RF_2J_LL']  = {   'name': 'RF_score_2J_LL',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 2J LL',
+                             'fold' : 3
+                         }
+variables['RF_2J_TT']  = {   'name': 'RF_score_2J_TT',
+                             'range' : (40,0,1),
+                             'xaxis' : 'Random Forest score 2J TT',
+                             'fold' : 3
+                         }
+variables['RF_2J_Bkg']  = {   'name': 'RF_score_2J_Bkg',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score 2J Background',
+                              'fold' : 3
+                          }
+
+
+
+variables['RF_VBF_LL']  = {   'name': 'RF_score_VBF_LL',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score VBF LL',
+                              'fold' : 3
+                          }
+variables['RF_VBF_TT']  = {   'name': 'RF_score_VBF_TT',
+                              'range' : (40,0,1),
+                              'xaxis' : 'Random Forest score VBF TT',
+                              'fold' : 3
+                          }
+variables['RF_VBF_Bkg']  = {   'name': 'RF_score_VBF_Bkg',
+                               'range' : (40,0,1),
+                               'xaxis' : 'Random Forest score VBF Background',
+                               'fold' : 3
+                           }
+
+
+variables['events']  = {   'name': '1',
+                        'range' : (1,0,2),
+                        'xaxis' : 'events',
+                        'fold' : 3
+                        }
+
 '''
 variables['BDT_0J']  = {   'name': 'BDTG4D3_0J',
                            'range' : (40,-1,1),
@@ -47,51 +125,33 @@ variables['BDT_VBF_WP50']  = {   'name': 'BDTG4D3_VBF',
                                 'fold' : 0
                         }
 
-'''
+
 ###### POLARIZATION
 
-variables['BDTG4D3_Pol']  = {   'name': 'BDTG4D3_Pol',
-                                'range' : (40, -1.0, 1.0),
-                                'xaxis' : 'BDTG4 Polarization',
-                                'fold' : 3
-                        }
-variables['BDTG4D3_Pol_Fit']  = {   'name': 'BDTG4D3_Pol',
-                                    'range' : ([-1.0, -0.8, -0.7, -0.6, -0.5, -0.4, -0.35, -0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 1.0],),
-                                    'xaxis' : 'BDT Polarization',
+variables['RF_score_0J_Pol']  = {   'name': 'RF_score_0J_Pol',
+                                    'range' : (40, 0.0, 1.0),
+                                    'xaxis' : 'Random forest for Polarization 0J (XGBoost)',
                                     'fold' : 3
-                        }
+                                 }
 
-variables['BDTG4D3_Pol_Fit2']  = {   'name': 'BDTG4D3_Pol',
-                                     'range' : ([-1., -0.79487179, -0.74358974, -0.69230769, -0.64102564, -0.58974359, -0.53846154, -0.48717949, -0.43589744, -0.38461538, -0.33333333, -0.28205128, -0.23076923, -0.17948718, -0.12820513, -0.07692308, -0.02564103, 0.02564103,  0.07692308,  0.12820513,  0.17948718,  0.23076923, 0.28205128,  0.33333333,  0.38461538,  0.43589744,  0.48717949, 0.53846154,  0.58974359,  0.64102564,  0.69230769,  0.74358974, 0.79487179, 1.],),
-                                     'xaxis' : 'BDT Polarization',
+variables['RF_score_1J_Pol']  = {   'name': 'RF_score_1J_Pol',
+                                    'range' : (40, 0.0, 1.0),
+                                    'xaxis' : 'Random forest for Polarization 1J (XGBoost)',
+                                    'fold' : 3
+                                 }
+
+variables['RF_score_2J_Pol']  = {   'name': 'RF_score_2J_Pol',
+                                    'range' : (40, 0.0, 1.0),
+                                    'xaxis' : 'Random forest for Polarization 2J (XGBoost)',
+                                    'fold' : 3
+                                 }
+
+variables['RF_score_VBF_Pol']  = {   'name': 'RF_score_VBF_Pol',
+                                     'range' : (40, 0.0, 1.0),
+                                     'xaxis' : 'Random forest for Polarization VBF (XGBoost)',
                                      'fold' : 3
-                        }
+                                  }
 
-
-variables['BDTG4D3_Pol_1']  = {   'name': 'BDTG4D3_Pol',
-                                  'range' : ([-1.0, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 1.0],),
-                                  'xaxis' : 'BDT Polarization',
-                                  'fold' : 3
-                              }
-
-variables['BDTG4D3_Pol_2']  = {   'name': 'BDTG4D3_Pol',
-                                  'range' : ([-1.0, -0.4, -0.2, 0.0, 0.2, 0.4, 1.0],),
-                                  'xaxis' : 'BDT Polarization',
-                                  'fold' : 3
-                              }
-
-variables['BDTG4D3_Pol_3']  = {   'name': 'BDTG4D3_Pol',
-                                  'range' : ([-1.0, -0.4, 0.0, 0.4, 1.0],),
-                                  'xaxis' : 'BDT Polarization',
-                                  'fold' : 3
-                              }
-
-
-variables['BDTG4D3_Pol_4']  = {   'name': 'BDTG4D3_Pol',
-                                  'range' : ([-1.0, -0.6, -0.5, -0.4, -0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 1.0],),
-                                  'xaxis' : 'BDT Polarization',
-                                  'fold' : 3
-                              }
 
 #####
 variables['events']  = {   'name': '1',      
@@ -100,8 +160,6 @@ variables['events']  = {   'name': '1',
                         'fold' : 3
                         }
 
-
-'''
 variables['nvtx']  = {   'name': 'PV_npvsGood',
                        'range' : (20,0,100),
                        'xaxis' : 'nvtx',
@@ -174,50 +232,8 @@ variables['phi2']  = {  'name': 'Lepton_phi[1]',
                         }
 
 
-
-
-variables['mll-drll'] = { 'name'  : ('mll', 'drll'),
-                            'range': ([0.5, 1.0, 1.5, 2.0, 2.5],[20., 30., 40., 150.],),
-                            'xaxis' : 'm_{ll} :#Delta #R_{ll}',
-                            'fold'  : 3
-                          }
-variables['mll-mth'] = { 'name'  : ('mll', 'mth'),
-                            'range': ([50., 75., 100., 150.],[20., 30., 40., 150.],),
-                            'xaxis' : 'm_{ll} :#Delta #Phi_{ll}',
-                            'fold'  : 3
-                          }
-variables['mll-mth-note'] = { 'name'  : ('mll', 'mth'),
-                              'range': ([40., 60., 80., 90., 100., 110., 120., 130., 500],[12., 25., 35., 40., 45., 50., 55., 70., 500.],),
-                              'xaxis' : 'm_{ll} : m_{T}^{H}',
-                              'fold'  : 3
-                          }
-variables['mll-mth-note2'] = { 'name'  : ('mll', 'mth'),
-                              'range': ([40., 60., 80., 90., 110., 500],[12., 25., 40., 50., 70., 500.],),
-                              'xaxis' : 'm_{ll} : m_{T}^{H}',
-                              'fold'  : 3
-                          }
-variables['mll-mtw2-note2'] = { 'name'  : ('mll', 'mtw2'),
-                              'range': ([20., 60., 70., 80., 90., 500],[12., 25., 40., 50., 70., 500.],),
-                              'xaxis' : 'm_{ll} : m_{T}^{H}',
-                              'fold'  : 3
-                          }
-variables['mll-mtw1-note2'] = { 'name'  : ('mll', 'mtw1'),
-                              'range': ([20., 60., 70., 80., 90., 500],[12., 25., 40., 50., 70., 500.],),
-                              'xaxis' : 'm_{ll} : m_{T}^{H}',
-                              'fold'  : 3
-                          }
-variables['mll-dphill-note'] = { 'name'  : ('mll', 'dphill'),
-                                 'range': ([0., 0.15, 0.35, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 4.0],[40., 60., 80., 90., 110., 130., 150., 200],),
-                                 'xaxis' : 'm_{ll} : #Delta #Phi_{ll}',
-                                 'fold'  : 3
-                             }
-
-
-
-
 variables['dphijjmet'] = {'name'  : 'abs(dphijjmet)',
                           'range' : (20, 0., 3.2),
-                          #'range' : (10, 0., 3.2),                                                                                                                                                         
                           'xaxis' : '#Delta#phi_{jjmet}',
                           'fold'  : 3
                          }

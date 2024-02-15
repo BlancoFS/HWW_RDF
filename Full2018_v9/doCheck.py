@@ -50,7 +50,7 @@ def run(submit=False):
     
     for fname in fnames:
         
-        file_name = output_path + "/mkShapes__WW_2018_fit__ALL__" + fname + ".root"
+        file_name = output_path + "/mkShapes__WW_2018_el9__ALL__" + fname + ".root"
         error_file = jobDir + fname + "/" + "err.txt"
         script_file = jobDir + fname + "/" + "script.py"
 
@@ -78,7 +78,7 @@ output = $(Folder)/out.txt
 error  = $(Folder)/err.txt
 log    = $(Folder)/log.txt
 request_cpus   = 1
-+JobFlavour = "testmatch"
++JobFlavour = "nextweek"
 queue 1 Folder in  RPLME_ALLSAMPLES"""
         
         resubmit = resubmit.replace("RPLME_ALLSAMPLES", " ".join(failed_jobs))

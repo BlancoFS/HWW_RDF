@@ -113,25 +113,28 @@ float TMVA_HWW_0J(
   float ptll_user = ptll;
   float drll_user = drll;
   float detall_user = detall;
+  float dphill_user = dphill;
+  float PuppiMET_pt_user = PuppiMET_pt;
+  float PuppiMET_phi_user = PuppiMET_phi;
   float btag_user = (float)Jet_btagDeepFlavB_CleanJet_jetIdx_0_;
   
   TMVA::Reader *reader = new TMVA::Reader( "!Color:Silent" );
   
-  reader->AddVariable("dphilmet1", &dphilmet1_user);
-  reader->AddVariable("dphilmet2", &dphilmet2_user);
-  reader->AddVariable("mpmet", &mpmet_user);
   reader->AddVariable("mll", &mll_user);
   reader->AddVariable("mth", &mth_user);
   reader->AddVariable("mtw1", &mtw1_user);
   reader->AddVariable("mtw2", &mtw2_user);
   reader->AddVariable("ptll", &ptll_user);
   reader->AddVariable("drll", &drll_user);
+  reader->AddVariable("dphilmet1", &dphilmet1_user);
+  reader->AddVariable("dphilmet2", &dphilmet2_user);
+  reader->AddVariable("dphill", &dphill_user);
+  reader->AddVariable("PuppiMET_pt", &PuppiMET_pt_user);
+  reader->AddVariable("PuppiMET_phi", &PuppiMET_phi_user);
   reader->AddVariable("detall", &detall_user);
-  //reader->AddVariable("btagDeepFlavB", &btag_user);
-  
-  
-  //TString dir    = "/afs/cern.ch/work/s/sblancof/public/CMSSW_10_6_10/src/PlotsConfigurations/Configurations/WW/Full2016_v7/DNN/dataset/weights/";
-  TString dir    = "/afs/cern.ch/work/s/sblancof/private/CMSSW_10_6_4/src/PlotsConfigurations/Configurations/WW/UL/GGF_DNN/dataset_for_ggH_0J/weights/";
+  reader->AddVariable("mpmet", &mpmet_user);
+    
+  TString dir    = "/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/Training/dataset_Binary_0J_DF/weights/";
   TString prefix = "TMVAClassification";
   
   TString methodName = TString("BDTG4D3") + TString(" method");

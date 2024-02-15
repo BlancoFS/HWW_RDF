@@ -6,7 +6,7 @@ It's the only necessary python configuration file, all the other files are impor
 """
 
 #: tag used to identify the configuration folder version
-tag = "WW_2017_fit"
+tag = "WW_2017"
 
 #: file to use as runner script, default uses mkShapesRDF.shapeAnalysis.runner, otherwise specify path to script
 runnerFile = "default"
@@ -15,7 +15,7 @@ runnerFile = "default"
 outputFile = "mkShapes__{}.root".format(tag)
 
 #: path to ouput folder
-outputFolder = "../../../../../../../../../../../eos/user/s/sblancof/MC/rootFiles"
+outputFolder = "../../../../../../../../../../../../eos/user/s/sblancof/MC/rootFiles"
 #: path to batch folder (used for condor submission)
 batchFolder = "condor"
 
