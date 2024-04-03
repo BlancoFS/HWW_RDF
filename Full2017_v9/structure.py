@@ -181,11 +181,6 @@ structure['ggZH_hww'] = {
                   'scaleSampleForDatacard' : {cut : 1.02494 for cut in cuts.keys()}, # XSECxBR correction for mH = 125.38
                   }
 
-structure['H_hww'] = {
-                  'isSignal' : 0,
-                  'isData'   : 0    
-                  }
-
 structure['bbH_hww'] = {
                   'isSignal' : 0,
                   'isData'   : 0
@@ -229,15 +224,11 @@ structure['DATA']  = {
               }
 
 
-'''
-print "INSTRUCTURE"
-print cuts
-print nuisances['WWresum0j']
-print "OK"
-
-for nuis in nuisances.itervalues():
+for nuis in nuisances.values():
     if 'cutspost' in nuis:
-        nuis['cuts'] = nuis['cutspost'](nuis, cuts)
+        print(nuis)
+        nuis['cuts'] = nuis['cutspost']
+        print(nuis)
+
         
-    print nuis
-'''
+        

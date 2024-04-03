@@ -10,14 +10,14 @@ aliases = OrderedDict()
 
 mc = [skey for skey in samples if skey not in ('Fake', 'DATA')]
 
-
-eleWP = 'mvaFall17V2Iso_WP90_tthmva_70'
-muWP  = 'cut_Tight80x_tthmva_80'
-
+eleWP = 'mvaFall17V2Iso_WP90'
+muWP  = 'cut_Tight80x'
 
 aliases['LepWPCut'] = {
-    'expr': 'LepCut2l__ele_'+eleWP+'__mu_'+muWP,
-    'samples': mc + ['DATA']
+    'expr': 'LepCut2l__ele_mvaFall17V2Iso_WP90__mu_cut_Tight80x*\
+    ( ((abs(Lepton_pdgId[0])==13 && Muon_mvaTTH[Lepton_muonIdx[0]]>0.82) || (abs(Lepton_pdgId[0])==11 && Lepton_mvaTTH_UL[0]>0.90))\
+    && ((abs(Lepton_pdgId[1])==13 && Muon_mvaTTH[Lepton_muonIdx[1]]>0.82) || (abs(Lepton_pdgId[1])==11 && Lepton_mvaTTH_UL[1]>0.90)) )',
+    'samples': mc + ['DATA','Fake']
 }
 
 aliases['LepWPSF'] = {
@@ -25,6 +25,35 @@ aliases['LepWPSF'] = {
     'samples': mc
 }
 
+# ttHMVA SFs and uncertainties
+# RVecD results = {SF, SF_up_out_el, SF_up_out_mu, SF_down_out_el, SF_down_out_mu}; 
+aliases['LepWPttHMVASF_tot'] = {
+    'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/ttHMVASF_cc.so","", ROOT.kTRUE)',
+                      'ROOT.gInterpreter.Declare("ttHMVASF tth_sf;")'],
+    'expr' :   'tth_sf("2016noHIPM", 2, "all", "nominal",Lepton_pt,Lepton_eta,Lepton_pdgId)',
+    'samples'    : mc
+}
+
+aliases['LepWPttHMVASF'] = {
+    'expr' : 'LepWPttHMVASF_tot[0]',
+    'samples'    : mc
+}
+aliases['LepWPttHMVASFEleUp'] = {
+    'expr' : 'LepWPttHMVASF_tot[1]',
+    'samples'    : mc
+}
+aliases['LepWPttHMVASFEleDown'] = {
+    'expr' : 'LepWPttHMVASF_tot[2]',
+    'samples'    : mc
+}
+aliases['LepWPttHMVASFMuUp'] = {
+    'expr' : 'LepWPttHMVASF_tot[3]',
+    'samples'    : mc
+}
+aliases['LepWPttHMVASFMuDown'] = {
+    'expr' : 'LepWPttHMVASF_tot[4]',
+    'samples'    : mc
+}
 
 aliases['CleanJet_VetoMap'] = {
     'linesToAdd': [".L /afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/Full2016_noHIPM/jet_veto_2016preVFP.cc+"],
@@ -42,42 +71,49 @@ aliases['gstarHigh'] = {
     'samples': ['WZ','Vg']
 }
 
-# Fake leptons transfer factor
+# Fake leptons transfer factor 
+# RVecF results = {fakeWeight,fakeWeightEleUp,fakeWeightEleDown,fakeWeightMuUp,fakeWeightMuDown,fakeWeightstatEleUp,fakeWeightstatEleDown,fakeWeightstatMuUp,fakeWeightstatMuDown};  
+aliases['fakeW_tot'] = {
+    'linesToProcess':['ROOT.gSystem.Load("/afs/cern.ch/work/s/sblancof/private/Run2Analysis/AlmaLinux9_mkShapes/mkShapesRDF/examples/extended/fake_rate_reader_cc.so","", ROOT.kTRUE)'],
+    'linesToDeclare': ['fake_rate_reader fake_W("2016_noHIPM", "90", "82", 0.90, 0.82, "nominal", 2, "std");'],
+    'expr' :   'fake_W(Lepton_pdgId,Lepton_pt,Lepton_eta,Lepton_mvaTTH_UL,Muon_mvaTTH,Lepton_muonIdx,nCleanJet,CleanJet_pt,Lepton_isTightMuon_cut_Tight80x,Lepton_isTightElectron_mvaFall17V2Iso_WP90)',
+    'samples'    : ['Fake']
+}
+
 aliases['fakeW'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP,
+    'expr': 'fakeW_tot[0]',
     'samples': ['Fake']
 }
-# And variations - already divided by central values in formulas !
 aliases['fakeWEleUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_EleUp',
+    'expr': 'fakeW_tot[1]',
     'samples': ['Fake']
 }
 aliases['fakeWEleDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_EleDown',
+    'expr': 'fakeW_tot[2]',
     'samples': ['Fake']
 }
 aliases['fakeWMuUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_MuUp',
+    'expr': 'fakeW_tot[3]',
     'samples': ['Fake']
 }
 aliases['fakeWMuDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_MuDown',
+    'expr': 'fakeW_tot[4]',
     'samples': ['Fake']
 }
 aliases['fakeWStatEleUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statEleUp',
+    'expr': 'fakeW_tot[5]',
     'samples': ['Fake']
 }
 aliases['fakeWStatEleDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statEleDown',
+    'expr': 'fakeW_tot[6]',
     'samples': ['Fake']
 }
 aliases['fakeWStatMuUp'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statMuUp',
+    'expr': 'fakeW_tot[7]',
     'samples': ['Fake']
 }
 aliases['fakeWStatMuDown'] = {
-    'expr': 'fakeW2l_ele_'+eleWP+'_mu_'+muWP+'_statMuDown',
+    'expr': 'fakeW_tot[8]',
     'samples': ['Fake']
 }
 
@@ -213,11 +249,11 @@ for shift in ['jes','lf','hf','lfstats1','lfstats2','hfstats1','hfstats2','cferr
 
     for targ in ['bVeto', 'bReq']:
         alias = aliases['%sSF%sup' % (targ, shift)] = copy.deepcopy(aliases['%sSF' % targ])
-        alias['expr'] = alias['expr'].replace('btagSF_deepcsv_shape', 'btagSF_deepjet_shape_up_%s' % shift)
+        alias['expr'] = alias['expr'].replace('btagSF_{}_shape'.format(bSF), 'btagSF_{}_shape_up_{}'.format(bSF, shift))
 
         alias = aliases['%sSF%sdown' % (targ, shift)] = copy.deepcopy(aliases['%sSF' % targ])
-        alias['expr'] = alias['expr'].replace('btagSF_deepcsv_shape', 'btagSF_deepjet_shape_down_%s' % shift)
-
+        alias['expr'] = alias['expr'].replace('btagSF_{}_shape'.format(bSF), 'btagSF_{}_shape_down_{}'.format(bSF, shift))
+        
     aliases['btagSF%sup' % shift] = {
         'expr': aliases['btagSF']['expr'].replace('SF', 'SF' + shift + 'up'),
         'samples': mc
@@ -259,7 +295,7 @@ aliases['Jet_PUIDSF_down'] = {
 
 aliases['SFweight'] = {
     #'expr': ' * '.join(['SFweight2l', 'LepWPCut', 'LepWPSF','Jet_PUIDSF', 'btagSF', 'L1PreFiringWeight_Nom', 'Lepton_rochesterSF']),
-    'expr': ' * '.join(['SFweight2l', 'LepWPCut', 'LepWPSF','Jet_PUIDSF', 'btagSF', 'L1PreFiringWeight_Nom']),
+    'expr': ' * '.join(['SFweight2l', 'LepWPCut', 'LepWPSF','Jet_PUIDSF', 'btagSF', 'L1PreFiringWeight_Nom', 'LepWPttHMVASF']),
     'samples': mc
 }
 

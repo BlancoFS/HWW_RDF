@@ -40,29 +40,9 @@ structure['ggWW']  = {
                   }
 
 
-structure['Wg']  = { 
+structure['Vg']  = { 
                   'isSignal' : 0,
                   'isData'   : 0 
-                  }
-
-structure['Wg']  = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
-
-structure['Zg']  = {
-                  'isSignal' : 0,
-                  'isData'   : 0
-                  }
-
-structure['WgS'] = { 
-                  'isSignal' : 0,
-                  'isData'   : 0 
-                  }
-
-structure['ZgS'] = {
-                  'isSignal' : 0,
-                  'isData'   : 0
                   }
 
 structure['VZ']  = { 
@@ -228,16 +208,6 @@ structure['DATA']  = {
                   'isData'   : 1 
               }
 
-
-'''
-print "INSTRUCTURE"
-print cuts
-print nuisances['WWresum0j']
-print "OK"
-
-for nuis in nuisances.itervalues():
+for nuis in nuisances.values():
     if 'cutspost' in nuis:
-        nuis['cuts'] = nuis['cutspost'](nuis, cuts)
-        
-    print nuis
-'''
+        nuis['cuts'] = nuis['cutspost']

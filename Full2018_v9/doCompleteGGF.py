@@ -97,8 +97,56 @@ print("Start computation")
 #hww2l2v_13TeV_WW_2j
 
 
+print("JER and MET not correctly transmitted to TOP and DYTT!!!!!!!!")
+for cutName in ["hww2l2v_13TeV_top_0j","hww2l2v_13TeV_top_1j","hww2l2v_13TeV_top_2j"]:
+    varName = "events"
+    inFile = ROOT.TFile(outputFile, "UPDATE")
+    inFile.cd(cutName+"/"+varName)
+    for sampleName in samples:
+        if sampleName in ["DATA", "Fake"]:
+            continue
+
+        print(sampleName)
+        for nuisanceName in nuisances:
+            if ("JER"!=nuisanceName and "met"!=nuisanceName):
+                continue
+
+            hist = inFile.Get(cutName+"/"+varName+"/histo_"+sampleName)
+            new_hist = hist
+            
+            new_hist.Clone("histo_"+sampleName+"_"+nuisances[nuisanceName]["name"]+"Up").Write()
+            new_hist.Clone("histo_"+sampleName+"_"+nuisances[nuisanceName]["name"]+"Down").Write()
+
+    del new_hist
+    del hist
+    inFile.Close()
+            
+for cutName in ["hww2l2v_13TeV_dytt_0j","hww2l2v_13TeV_dytt_1j","hww2l2v_13TeV_dytt_2j"]:
+    varName = "events"
+    inFile = ROOT.TFile(outputFile, "UPDATE")
+    inFile.cd(cutName+"/"+varName)
+    for sampleName in samples:
+        if sampleName in ["DATA", "Fake"]:
+            continue
+        for nuisanceName in nuisances:
+            if ("JER"!=nuisanceName and "met"!=nuisanceName and "JES" not in nuisanceName):
+                continue
+
+            hist = inFile.Get(cutName+"/"+varName+"/histo_"+sampleName)
+            new_hist = hist
+            new_hist.Clone("histo_"+sampleName+"_"+nuisances[nuisanceName]["name"]+"Up").Write()
+            new_hist.Clone("histo_"+sampleName+"_"+nuisances[nuisanceName]["name"]+"Down").Write()
+
+    del new_hist
+    del hist
+    inFile.Close()
+
+
+            
+print("Fixed!!!")
+print("Now create ggToWW and qqToWW")
+
 for cutName in cuts:
-    #for cutName in ["hww2l2v_13TeV_sr_BDT95_0j"]:
     print(cutName + "<------")
     for variableName in variables:
         print("    -->" + variableName)
@@ -128,19 +176,12 @@ for cutName in cuts:
         for nuisanceName in nuisances:
 
             skipNuisance = False
+            #if ("event" in variableName) and ("hww2l2v_13TeV_top" in cutName or "hww2l2v_13TeV_dytt" in cutName) and ("JER"==nuisanceName or "met"==nuisanceName):
+            #    skipNuisance = True
+            #
+            #if ("event" in variableName) and ("hww2l2v_13TeV_dytt" in cutName) and ("JES" in nuisanceName):
+            #    skipNuisance = True
             
-            if nuisanceName == "met":
-                skipNuisance = True
-
-            if "hww2l2v_13TeV_top" in cutName and nuisanceName=="JER":
-                skipNuisance = True
-
-            if "hww2l2v_13TeV_dytt" in cutName and ("JES" in nuisanceName or "JER" in nuisanceName):
-                skipNuisance = True
-
-            if "hww2l2v_13TeV_WW" in cutName and nuisanceName=="JER":
-                skipNuisance = True
-
             if skipNuisance:
                 
                 new_hist_gg_up = new_hist_gg

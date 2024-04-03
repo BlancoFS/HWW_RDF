@@ -72,8 +72,8 @@ cuts['hww2l2v_13TeV_sr_RF_Signal'] = {
 cuts['hww2l2v_13TeV_top']  = { 
    'expr' : 'topcr && mpmet>15 && Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13',
    'categories' : {
-       '0j' : 'zeroJet',
-       '1j' : 'oneJet',
+       '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0',
+       '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0',
        '2j' : 'Sum(CleanJet_pt>30.0)==2',
    }
 }
@@ -81,8 +81,8 @@ cuts['hww2l2v_13TeV_top']  = {
 cuts['hww2l2v_13TeV_dytt']  = { 
    'expr' : 'dycr && Lepton_pdgId[0]*Lepton_pdgId[1] == -11*13',
    'categories' : { 
-       '0j' : 'zeroJet',
-       '1j' : 'oneJet',
+       '0j' : 'Alt(CleanJet_pt,0, 0.0)<30.0',
+       '1j' : 'Alt(CleanJet_pt,0, 0.0)>30.0 && Alt(CleanJet_pt,1, 0.0)<30.0',
        '2j' : 'Sum(CleanJet_pt>30.0)==2',
    }
 }

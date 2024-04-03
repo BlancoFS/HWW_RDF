@@ -6,7 +6,7 @@ It's the only necessary python configuration file, all the other files are impor
 """
 
 #: tag used to identify the configuration folder version
-tag = "WW_2018_el9"
+tag = "WW_2018"
 #tag = "WW_2018_complete"
 
 #: file to use as runner script, default uses mkShapesRDF.shapeAnalysis.runner, otherwise specify path to script
